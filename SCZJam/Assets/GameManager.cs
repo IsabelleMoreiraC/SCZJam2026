@@ -62,13 +62,19 @@ public class GameManager : MonoBehaviour
             sorteada = todasAsFigurinhas[indiceAleatorio]; // Sorteia a figurinha comum correspondente ao índice aleatório
         }
         pacoteAberto.Add(sorteada); // Adiciona a figurinha sorteada à lista do pacote
+
     }
     Debug.Log("Pacote gerado com " + pacoteAberto.Count + " figurinhas."); // Loga a quantidade de figurinhas no pacote gerado
     MostrarPacote(); // Chama a função para mostrar as figurinhas do pacote na tela
+
+
     
-    // ← Adiciona isso aqui (reativa botão Bafo):
+    // reativa botão do Bafo:
     BafoManager bafoManager = FindFirstObjectByType<BafoManager>(); // Encontra o BafoManager na cena
-    bafoManager.botaoJogarBafo.interactable = true;  // Reativa o botão de jogar bafo, permitindo que o jogador jogue após abrir um pacote
+    if (bafoManager != null)
+        {
+            bafoManager.botaoJogarBafo.interactable = true;
+        }
 }
 
     void MostrarPacote() // Função para mostrar as figurinhas do pacote na tela

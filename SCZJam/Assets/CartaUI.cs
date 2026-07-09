@@ -19,10 +19,19 @@ public class CartaUI : MonoBehaviour
     }
     void ColarNoAlbum()
     {
-        gameManager.AdicionarNoAlbum(figurinha); // Chama o método do GameManager para adicionar a figurinha ao álbum
-        Destroy(gameObject); // Destroi a carta da UI após colar no álbum
-        Debug.Log("Colando "+ figurinha.nomeFigurinha);
-        gameManager.VerificarSeTodasAsCartasForamDestruidas(); // Verifica se todas as cartas foram destruídas para reativar o botão de comprar pacote
+{
+    // Se colar essa carta, vai ficar com 0 cartas ela é bloqueada
+    if (gameManager.maoDoJogador.Count < 1)
+    {
+        Debug.Log("Você deve guardar pelo menos uma carta.");
+        return;  //  Sai sem colar
+    }
+    
+    gameManager.AdicionarNoAlbum(figurinha);
+    Destroy(gameObject);
+    Debug.Log("Colando "+ figurinha.nomeFigurinha);
+    gameManager.VerificarSeTodasAsCartasForamDestruidas();
+}
     }
     void GuardarNaMao()
     {
@@ -30,6 +39,11 @@ public class CartaUI : MonoBehaviour
         Destroy(gameObject); // Destroi a carta da UI após guardar na mão
         Debug.Log("Guardando: " + figurinha.nomeFigurinha);
         gameManager.VerificarSeTodasAsCartasForamDestruidas(); // Verifica se todas as cartas foram destruídas para reativar o botão de comprar pacote
-
+        BafoManager bafoManager = FindFirstObjectByType<BafoManager>(); // Encontra o BafoManager na cena
+        if (bafoManager !=null)
+        {
+            bafoManager.botaoJogarBafo.interactable = true; // Reativa o botão de jogar bafo, permitindo que o
+            //  jogador jogue após abrir um pacote
+        }
     }
 }

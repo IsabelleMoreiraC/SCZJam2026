@@ -393,60 +393,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52203821}
   m_CullTransparentMesh: 1
---- !u!1 &70685078
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 70685080}
-  - component: {fileID: 70685079}
-  m_Layer: 0
-  m_Name: BafoManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &70685079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70685078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c94fec39e0a5084d919ff1a39731a7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BafoManager
-  faseMenuContainer: {fileID: 106003255}
-  sorteioContainer: {fileID: 1763131496}
-  textoVsTime: {fileID: 1722088035}
-  textoMaoOponente: {fileID: 1283355721}
-  textoSuaMao: {fileID: 1756786676}
-  botaoCara: {fileID: 0}
-  botaoCoroa: {fileID: 0}
-  botaoRolarMoeda: {fileID: 0}
-  textoResultadoMoeda: {fileID: 0}
-  botaoJogarBafo: {fileID: 0}
---- !u!4 &70685080
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70685078}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 647.3963, y: 445.41238, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &106003255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,4 +3082,3 @@ SceneRoots:
   - {fileID: 678229621}
   - {fileID: 1418565394}
   - {fileID: 246650102}
-  - {fileID: 70685080}

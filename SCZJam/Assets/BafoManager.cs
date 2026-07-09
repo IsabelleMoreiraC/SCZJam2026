@@ -52,7 +52,11 @@ public class BafoManager : MonoBehaviour
     void EscolherLado(string lado)
     {
         escolhaJogador = lado; // Armazena a escolha do jogador
-        botaoRolarMoeda.gameObject.SetActive(true); // Mostra o botão de rolar moeda após escolher
+        botaoCara.gameObject.SetActive(false); // Faz os botoes aparecerem após a escolha
+        botaoCoroa.gameObject.SetActive(false);
+        botaoCara.interactable = false; // Desabilita os botões após a escolha
+        botaoCoroa.interactable = false;
+        botaoRolarMoeda.gameObject.SetActive(true); // Agora ele some
     }
 
     void RolarMoeda()
@@ -74,7 +78,7 @@ public class BafoManager : MonoBehaviour
         {
             textoResultadoMoeda.text += "O oponente começa!";
         }
-        botaoRolarMoeda.interactable = false; // Desabilita o botão de rolar moeda após o resultado
+        botaoRolarMoeda.gameObject.SetActive(false); // Esconde o botão de rolar moeda após o resultado
     }
 
     public void IniciarBafo()
@@ -114,6 +118,12 @@ public class BafoManager : MonoBehaviour
     }
     
     // Se chegou aqui, pode jogar
+    botaoJogarBafo.interactable = true;
     IniciarBafo();
 }
+public void ReativarBotaoBafo() // Função para reativar o botão de jogar bafo
+{
+    botaoJogarBafo.interactable = true; // Reativa o botão de jogar bafo, permitindo que o jogador jogue após abrir um pacote
+}
+ 
 }
