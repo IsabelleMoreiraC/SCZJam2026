@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
         public Transform pacoteContainer; // referência ao container onde as cartas serão instanciadas
     private Figurinha[] todasAsFigurinhas; // array para armazenar todas as figurinhas disponíveis no jogo
     private List<Figurinha> pacoteAberto; // lista para armazenar as figurinhas do pacote que foi aberto
+
+    // A lista pra guardar as figurinhas agora
+
+    private List<Figurinha> albumDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas coladas no álbum do jogador
+    private List<Figurinha> maoDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas guardadas na mão do jogador
     void Start()
     {
         comprarPacote.onClick.AddListener(ComprarPacote); // Adiciona o listener para o botão de comprar pacote
@@ -62,18 +67,57 @@ public class GameManager : MonoBehaviour
         MostrarPacote(); // Chama a função para mostrar as figurinhas do pacote na tela
     }
 
-    void MostrarPacote()// Função para mostrar as figurinhas do pacote na tela
+    void MostrarPacote() // Função para mostrar as figurinhas do pacote na tela
+{
+    comprarPacote.interactable = false; // Desativa o botão de comprar pacote enquanto o pacote está sendo mostrado
+    foreach (Transform carta in pacoteContainer)  // Itera sobre todos os filhos do container de pacotes
     {
-        //pra limpar as cartas antigas antes de mostrar as novas
-        foreach (Transform carta in pacoteContainer)
+        Destroy(carta.gameObject); // Destroi cada carta filha do container para limpar a tela antes de mostrar o novo pacote
+    }
+    
+    for (int i = 0; i < pacoteAberto.Count; i++) // Itera sobre cada figurinha no pacote aberto
+    {
+        GameObject novaCarta = Instantiate(cartaPrefab, pacoteContainer, false); // Instancia uma nova carta a partir 
+        // do prefab e a coloca como filha do container de pacotes
+        CartaUI cartaUI = novaCarta.GetComponent<CartaUI>(); // Obtém o componente CartaUI da nova carta instanciada
+        cartaUI.Inicializar(pacoteAberto[i]); // Inicializa a carta com a figurinha correspondente do pacote aberto
+    }
+}
+public void VerificarSeTodasAsCartasForamDestruidas()
+{
+    StartCoroutine(VerificarProximoFrame());
+}
+
+System.Collections.IEnumerator VerificarProximoFrame()
+{
+    yield return null;
+    if (pacoteContainer.childCount == 0)
+    {
+        comprarPacote.interactable = true;
+    }
+}
+
+    public bool JaTemNoAlbum(Figurinha fig) // Função para verificar se o jogador já tem a figurinha no álbum
+    {
+        return albumDoJogador.Contains(fig); // Retorna true se a figurinha estiver na lista do álbum, false caso contrário
+    }
+    public void AdicionarNoAlbum(Figurinha fig) // Função pra adicionar a figurinha no album do jogador
+    {
+        if (!JaTemNoAlbum(fig)) // Verifica se o jogador ainda não tem a figurinha no álbum, o ! quer dizer que é falso o parametro
+        // Se o jogador não tiver a figurinha no álbum, adiciona ela
         {
-            Destroy(carta.gameObject); // Destroi cada carta antiga no container
+            albumDoJogador.Add(fig); //Adiciona a figurinha na lista do álbum do jogador
+            Debug.Log("Adicionado ao album: " + fig.nomeFigurinha); // Loga a ação de adicionar a figurinha ao álbum
         }
-        //Instancia as cartas do pacote aberto na tela
-        for (int i = 0; i <pacoteAberto.Count; i++)
+        else
         {
-            GameObject novaCarta = Instantiate(cartaPrefab, pacoteContainer, false); // Instancia uma nova carta no container
-            //vc conecta a figurinha com a carta
+            Debug.Log("Figurinha repetida!"); // Loga que a figurinha já está no álbum
         }
     }
+    public void AdicionarAoMao(Figurinha fig)
+    {
+        maoDoJogador.Add(fig); // Adiciona a figurinha na lista da mão do jogador
+        Debug.Log("Adicionado à mão: " + fig.nomeFigurinha); // Loga a ação de adicionar a figurinha à mão
+    }
+    
 }
