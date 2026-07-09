@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     public int Moedas;
     public Button comprarPacote;
      public TextMeshProUGUI moedasText;   // referência ao texto de moedas
-    
+        public GameObject cartaPrefab; // referência ao prefab da carta
+        public Transform pacoteContainer; // referência ao container onde as cartas serão instanciadas
     private Figurinha[] todasAsFigurinhas; // array para armazenar todas as figurinhas disponíveis no jogo
     private List<Figurinha> pacoteAberto; // lista para armazenar as figurinhas do pacote que foi aberto
     void Start()
@@ -58,5 +59,21 @@ public class GameManager : MonoBehaviour
             pacoteAberto.Add(sorteada); // Adiciona a figurinha sorteada à lista do pacote
         }
         Debug.Log("Pacote gerado com " + pacoteAberto.Count + " figurinhas."); // Loga a quantidade de figurinhas no pacote gerado
+        MostrarPacote(); // Chama a função para mostrar as figurinhas do pacote na tela
+    }
+
+    void MostrarPacote()// Função para mostrar as figurinhas do pacote na tela
+    {
+        //pra limpar as cartas antigas antes de mostrar as novas
+        foreach (Transform carta in pacoteContainer)
+        {
+            Destroy(carta.gameObject); // Destroi cada carta antiga no container
+        }
+        //Instancia as cartas do pacote aberto na tela
+        for (int i = 0; i <pacoteAberto.Count; i++)
+        {
+            GameObject novaCarta = Instantiate(cartaPrefab, pacoteContainer, false); // Instancia uma nova carta no container
+            //vc conecta a figurinha com a carta
+        }
     }
 }
