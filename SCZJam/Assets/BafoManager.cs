@@ -15,6 +15,15 @@ public class BafoManager : MonoBehaviour
 
     //referencia o gameManager para pegar as listas
     private GameManager gameManager;
+    //Botão cara ou coroa
+    public Button botaoCara;
+    public Button botaoCoroa;
+    public Button botaoRolarMoeda;
+    public TextMeshProUGUI textoResultadoMoeda;
+
+    private string escolhaJogador = ""; // Armazena a escolha do jogador
+    private bool jaRolou = false; // Variável para controlar se a moeda já foi rolada
+
 
     private string[] times = { "Time A", "Time B", "Time C", "Time D" }; //Array com os nomes dos times
     private int faseAtual = 0; //0 = TimeA, 1 = TimeB, 2 = TimeC, 3 = TimeD 
@@ -27,11 +36,45 @@ public class BafoManager : MonoBehaviour
         //primeiro ve se pode jogar
         Debug.Log("Botão conectado!");// Adiciona o listener para o botão de jogar bafo
         
+        botaoCara.onClick.AddListener(() => EscolherLado("Cara")); // Adiciona o listener para o botão de cara
+        botaoCoroa.onClick.AddListener(() => EscolherLado("Coroa")); // Adiciona o listener para o botão de coroa
+        botaoRolarMoeda.onClick.AddListener(RolarMoeda); // Adiciona o listener para o botão de rolar moeda
+        botaoRolarMoeda.gameObject.SetActive(false); //esconde até escolher
+
+
     }
 
     void Update()
     {
         
+    }
+
+    void EscolherLado(string lado)
+    {
+        escolhaJogador = lado; // Armazena a escolha do jogador
+        botaoRolarMoeda.gameObject.SetActive(true); // Mostra o botão de rolar moeda após escolher
+    }
+
+    void RolarMoeda()
+    {
+        if (jaRolou)return; // Evita que o jogador role a moeda mais de uma vez
+        string resultado = Random.Range(0,2) == 0 ? "Cara" : "Coroa"; // Gera um resultado aleatório para a moeda
+        jaRolou =true;  // Marca que a moeda já foi rolada
+
+        //mostrar resultado
+        textoResultadoMoeda.text = $"Você escolheu: {escolhaJogador}\n";
+        textoResultadoMoeda.text += $"Resultado: {resultado}\n";
+
+        if (escolhaJogador == resultado)
+        {
+            textoResultadoMoeda.text += "Você começa!";
+
+        }
+        else
+        {
+            textoResultadoMoeda.text += "O oponente começa!";
+        }
+        botaoRolarMoeda.interactable = false; // Desabilita o botão de rolar moeda após o resultado
     }
 
     public void IniciarBafo()
@@ -53,15 +96,24 @@ public class BafoManager : MonoBehaviour
 
     }
 
-    public void VerificarSePodeJogarBafo()
+   public void VerificarSePodeJogarBafo() 
+{
+    // Se ainda há cartas na tela, não deixa jogar bafo
+    if (gameManager.pacoteContainer.childCount > 0)
     {
-        // Se ainda há cartas na tela, não deixa jogar bafo
-        if (gameManager.pacoteContainer.childCount > 0 )
-        {
-            Debug.Log("Ainda há cartas na tela! Não pode jogar bafo.");
-            return; // Sai da função sem fazer nada. Por enquanto deixa só o debug
-        }
-        //se chegou aqui, pode jogar
-        IniciarBafo();
+        Debug.Log("Ainda há cartas na tela! Termine de escolher primeiro.");
+        return;
     }
+    
+    // Se não tem cartas na mão, não deixa jogar
+    if (gameManager.maoDoJogador.Count == 0)
+    {
+        Debug.Log("Você não tem cartas na mão! Compre mais pacotes.");
+        botaoJogarBafo.interactable = false;  // Desabilita o botão também
+        return;
+    }
+    
+    // Se chegou aqui, pode jogar
+    IniciarBafo();
+}
 }

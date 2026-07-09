@@ -45,27 +45,31 @@ public class GameManager : MonoBehaviour
         // posso tirar isso dps
           }
     void GerarPacote()
+{
+    pacoteAberto = new List<Figurinha>(); // Inicializa a lista de figurinhas do pacote
+    for (int i = 0; i<5; i++) // Gera 5 figurinhas aleatórias para o pacote
     {
-        pacoteAberto = new List<Figurinha>(); // Inicializa a lista de figurinhas do pacote
-        for (int i = 0; i<5; i++) // Gera 5 figurinhas aleatórias para o pacote
+       float chance = Random.Range(0f,100f); // Gera um número aleatório entre 0 e 100 para determinar a raridade da figurinha
+       Figurinha sorteada;
+       if (chance<30) // 30% de chance de ser uma figurinha rara (índices 40 a 51)
         {
-           float chance = Random.Range(0f,100f); // Gera um número aleatório entre 0 e 100 para determinar a raridade da figurinha
-           Figurinha sorteada;
-           if (chance<30)//30% rara (IDs 41-52)
-            {
-                int indiceAleatorio = Random.Range(40,52); // Gera um índice aleatório entre 40 e 51 (IDs das figurinhas raras)
-                sorteada = todasAsFigurinhas[indiceAleatorio]; // Seleciona a figurinha rara correspondente ao índice aleatório
-            }
-            else // 70% comum (IDs 1-40)
-            {
-                int indiceAleatorio = Random.Range(0,40); // Gera um índice aleatório entre 0 e 39 (IDs das figurinhas comuns)
-                sorteada = todasAsFigurinhas[indiceAleatorio]; // Seleciona a figurinha comum correspondente ao índice aleatório
-            }
-            pacoteAberto.Add(sorteada); // Adiciona a figurinha sorteada à lista do pacote
+            int indiceAleatorio = Random.Range(40,52);  // Gera um índice aleatório entre 40 e 51 para pegar uma figurinha rara
+            sorteada = todasAsFigurinhas[indiceAleatorio]; // Sorteia a figurinha rara correspondente ao índice aleatório
         }
-        Debug.Log("Pacote gerado com " + pacoteAberto.Count + " figurinhas."); // Loga a quantidade de figurinhas no pacote gerado
-        MostrarPacote(); // Chama a função para mostrar as figurinhas do pacote na tela
+        else // 70% de chance de ser uma figurinha comum (índices 0 a 39)
+        {
+            int indiceAleatorio = Random.Range(0,40); // Gera um índice aleatório entre 0 e 39 para pegar uma figurinha comum
+            sorteada = todasAsFigurinhas[indiceAleatorio]; // Sorteia a figurinha comum correspondente ao índice aleatório
+        }
+        pacoteAberto.Add(sorteada); // Adiciona a figurinha sorteada à lista do pacote
     }
+    Debug.Log("Pacote gerado com " + pacoteAberto.Count + " figurinhas."); // Loga a quantidade de figurinhas no pacote gerado
+    MostrarPacote(); // Chama a função para mostrar as figurinhas do pacote na tela
+    
+    // ← Adiciona isso aqui (reativa botão Bafo):
+    BafoManager bafoManager = FindFirstObjectByType<BafoManager>(); // Encontra o BafoManager na cena
+    bafoManager.botaoJogarBafo.interactable = true;  // Reativa o botão de jogar bafo, permitindo que o jogador jogue após abrir um pacote
+}
 
     void MostrarPacote() // Função para mostrar as figurinhas do pacote na tela
 {
