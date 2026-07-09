@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     // A lista pra guardar as figurinhas agora
 
     private List<Figurinha> albumDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas coladas no álbum do jogador
-    private List<Figurinha> maoDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas guardadas na mão do jogador
+    public List<Figurinha> maoDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas guardadas na mão do jogador
     void Start()
     {
         comprarPacote.onClick.AddListener(ComprarPacote); // Adiciona o listener para o botão de comprar pacote
