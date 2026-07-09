@@ -719,6 +719,9 @@ MonoBehaviour:
   moedasText: {fileID: 697792863}
   cartaPrefab: {fileID: 2030725939046728813, guid: 82e70625b9aeb4a4d9d87bec6af76982, type: 3}
   pacoteContainer: {fileID: 1891673184}
+  todasAsFigurinhas: []
+  pacoteAberto: []
+  albumDoJogador: []
   maoDoJogador: []
 --- !u!4 &246650102
 Transform:
@@ -999,8 +1002,8 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1008,14 +1011,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,6 +1121,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &519420033
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
 --- !u!1 &521626833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,6 +1533,9 @@ MonoBehaviour:
   moedasText: {fileID: 697792863}
   cartaPrefab: {fileID: 2030725939046728813, guid: 82e70625b9aeb4a4d9d87bec6af76982, type: 3}
   pacoteContainer: {fileID: 1891673184}
+  todasAsFigurinhas: []
+  pacoteAberto: []
+  albumDoJogador: []
   maoDoJogador: []
 --- !u!223 &678229620
 Canvas:
@@ -1595,11 +1601,12 @@ MonoBehaviour:
   textoVsTime: {fileID: 1722088035}
   textoMaoOponente: {fileID: 1283355721}
   textoSuaMao: {fileID: 1756786676}
+  textoResultadoMoeda: {fileID: 1526358931}
+  botaoJogarBafo: {fileID: 224849182}
   botaoCara: {fileID: 562414827}
   botaoCoroa: {fileID: 247616659}
   botaoRolarMoeda: {fileID: 1268291712}
-  textoResultadoMoeda: {fileID: 1526358931}
-  botaoJogarBafo: {fileID: 224849182}
+  botaoVerAlbum: {fileID: 521626835}
 --- !u!1 &697792861
 GameObject:
   m_ObjectHideFlags: 0
