@@ -1573,10 +1573,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1720173930}
-  - {fileID: 697792862}
   - {fileID: 1891673184}
   - {fileID: 106003256}
   - {fileID: 1763131497}
+  - {fileID: 697792862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1607,6 +1607,8 @@ MonoBehaviour:
   botaoCoroa: {fileID: 247616659}
   botaoRolarMoeda: {fileID: 1268291712}
   botaoVerAlbum: {fileID: 521626835}
+  moedasText: {fileID: 697792863}
+  buttonVoltar: {fileID: 0}
 --- !u!1 &697792861
 GameObject:
   m_ObjectHideFlags: 0

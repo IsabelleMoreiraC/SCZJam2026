@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+
 public class BafoManager : MonoBehaviour
 {
     public GameObject faseMenuContainer;
@@ -18,6 +19,9 @@ public class BafoManager : MonoBehaviour
     public Button botaoCoroa;
     public Button botaoRolarMoeda;
     public Button botaoVerAlbum;
+    public TextMeshProUGUI moedasText;
+        public Button buttonVoltar;
+
     
     private GameManager gameManager;
     private string[] times = { "Time A", "Time B", "Time C", "Time D" };
@@ -111,6 +115,7 @@ public class BafoManager : MonoBehaviour
     {
         faseMenuContainer.SetActive(false);
         sorteioContainer.SetActive(false);
+        moedasText.gameObject.SetActive(false);  
         SceneManager.LoadScene("AlbumScene", LoadSceneMode.Additive);
         StartCoroutine(PassarGameManagerParaAlbum());
     }
@@ -139,4 +144,11 @@ public class BafoManager : MonoBehaviour
         botaoRolarMoeda.gameObject.SetActive(false);
         textoResultadoMoeda.text = "";
     }
+
+    public void VoltarDoAlbum()
+{
+    moedasText.gameObject.SetActive(true);  //  Mostra as moedas de novo
+    faseMenuContainer.SetActive(true);      //  Mostra o menu
+    SceneManager.UnloadSceneAsync("AlbumScene");  //  Descarrega a AlbumScene
+}
 }

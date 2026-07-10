@@ -2,16 +2,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class AlbumManager : MonoBehaviour
 {
     public GameObject cartaAlbumPrefab;
     public Transform contentContainer;
 
     private GameManager gameManager;
+    private BafoManager bafoManager;
     private Figurinha[] todasAsFigurinhas;
+            public Button buttonVoltar;
 
     void Start()
     {
+            bafoManager = FindFirstObjectByType<BafoManager>();
     }
 
     public void SetGameManager(GameManager gm)
@@ -65,4 +69,16 @@ public class AlbumManager : MonoBehaviour
         yield return null;
         yield return null;
     }
+  public void VoltarDoAlbum()
+{
+    BafoManager bafoManager = FindFirstObjectByType<BafoManager>();
+
+    if (bafoManager != null)
+    {
+        bafoManager.faseMenuContainer.SetActive(true);
+        bafoManager.moedasText.gameObject.SetActive(true);
+    }
+
+    SceneManager.UnloadSceneAsync("AlbumScene");
+}
 }
