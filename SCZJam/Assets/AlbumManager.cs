@@ -1,48 +1,68 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class AlbumManager : MonoBehaviour
 {
-    public GameObject cartaAlbumPrefab; // Prefab da carta que será instanciada
-    public Transform contentContainer; // Container onde as cartas serão adicionadas na UI
+    public GameObject cartaAlbumPrefab;
+    public Transform contentContainer;
 
-    private GameManager gameManager; // Referência ao GameManager para acessar as listas de figurinhas
-    private Figurinha [] todasAsFigurinhas; // Array para armazenar todas as figurinhas disponíveis
+    private GameManager gameManager;
+    private Figurinha[] todasAsFigurinhas;
 
-     void Start()
+    void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>(); // Encontra o GameManager na cena
-        //Carrega as 52 figurinhas
-        todasAsFigurinhas  = Resources.LoadAll<Figurinha>("Figurinhas"); // Carrega todas as figurinhas da pasta "Resources/Figurinhas"
+    }
 
-        // Instancia uma carta para cada figurinha e inicializa a UI
-        for (int i  = 0; i < todasAsFigurinhas.Length; i++) //Loop para percorrer todas figurinhas
+    public void SetGameManager(GameManager gm)
+    {
+        gameManager = gm;
+        CarregarAlbum();
+    }
+
+    void CarregarAlbum()
+    {
+        StartCoroutine(CarregarAlbumCoroutine());
+    }
+
+    System.Collections.IEnumerator CarregarAlbumCoroutine()
+    {
+        yield return null;
+
+        if (gameManager == null)
         {
-            GameObject novaCarta = Instantiate(cartaAlbumPrefab, contentContainer); // Instancia a carta no container
-            Figurinha fig = todasAsFigurinhas[i]; // Obtém a figurinha correspondente 
+            Debug.Log("GameManager não encontrado!");
+            yield break;
+        }
 
-            //Se tem no albúm vai ficar colorida
-            //Se não tem vai ficar acinzentada
+        todasAsFigurinhas = Resources.LoadAll<Figurinha>("Figurinhas");
+        Debug.Log("Figurinhas carregadas: " + todasAsFigurinhas.Length);
 
-            if (gameManager.albumDoJogador.Contains(fig)) //Verifica se a figurinha já está no álbum do jogador
+        for (int i = 0; i < todasAsFigurinhas.Length; i++)
+        {
+            GameObject novaCarta = Instantiate(cartaAlbumPrefab, contentContainer);
+            
+            Figurinha fig = todasAsFigurinhas[i];
+            
+            Image imagemCarta = novaCarta.GetComponentInChildren<Image>();
+            
+            if (imagemCarta == null)
             {
-                //Deixa Colorida (normal)
-               Image imagemCarta = novaCarta.GetComponentInChildren<Image>(); // Obtém a referência ao componente Image da carta
-                    imagemCarta.color = Color.white; // Aplica a cor branca para indicar que a figurinha está no álbum
+                continue;
+            }
+            
+            if (gameManager.albumDoJogador.Contains(fig))
+            {
+                imagemCarta.color = Color.white;
             }
             else
             {
-                //Deixa Acinzentada(grayscale)
-                Image imagemCarta = novaCarta.GetComponentInChildren<Image>(); // Obtém a referência ao componente Image da carta
-                imagemCarta.color = Color.gray; // Aplica a cor cinza para indicar que a figurinha não está no álbum
+                imagemCarta.color = Color.gray;
             }
-            //GetComponent() = pega o componente NO GameObject atual
-            //GetComponentInChildren() = pega o componente NO GameObject ou nos filhos dele
-            //Usei isso pq a imagem ta dentro do prefab da carta, então é filho do GameObject que instanciei
         }
-    }
-
-     void Update()
-    {
         
+        LayoutRebuilder.MarkLayoutForRebuild(contentContainer as RectTransform);
+        yield return null;
+        yield return null;
     }
 }

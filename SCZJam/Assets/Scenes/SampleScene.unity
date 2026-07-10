@@ -719,6 +719,9 @@ MonoBehaviour:
   moedasText: {fileID: 697792863}
   cartaPrefab: {fileID: 2030725939046728813, guid: 82e70625b9aeb4a4d9d87bec6af76982, type: 3}
   pacoteContainer: {fileID: 1891673184}
+  todasAsFigurinhas: []
+  pacoteAberto: []
+  albumDoJogador: []
   maoDoJogador: []
 --- !u!4 &246650102
 Transform:
@@ -1530,6 +1533,9 @@ MonoBehaviour:
   moedasText: {fileID: 697792863}
   cartaPrefab: {fileID: 2030725939046728813, guid: 82e70625b9aeb4a4d9d87bec6af76982, type: 3}
   pacoteContainer: {fileID: 1891673184}
+  todasAsFigurinhas: []
+  pacoteAberto: []
+  albumDoJogador: []
   maoDoJogador: []
 --- !u!223 &678229620
 Canvas:
@@ -1595,11 +1601,12 @@ MonoBehaviour:
   textoVsTime: {fileID: 1722088035}
   textoMaoOponente: {fileID: 1283355721}
   textoSuaMao: {fileID: 1756786676}
+  textoResultadoMoeda: {fileID: 1526358931}
+  botaoJogarBafo: {fileID: 224849182}
   botaoCara: {fileID: 562414827}
   botaoCoroa: {fileID: 247616659}
   botaoRolarMoeda: {fileID: 1268291712}
-  textoResultadoMoeda: {fileID: 1526358931}
-  botaoJogarBafo: {fileID: 224849182}
+  botaoVerAlbum: {fileID: 521626835}
 --- !u!1 &697792861
 GameObject:
   m_ObjectHideFlags: 0

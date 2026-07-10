@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
      public TextMeshProUGUI moedasText;   // referência ao texto de moedas
         public GameObject cartaPrefab; // referência ao prefab da carta
         public Transform pacoteContainer; // referência ao container onde as cartas serão instanciadas
-    private Figurinha[] todasAsFigurinhas; // array para armazenar todas as figurinhas disponíveis no jogo
-    private List<Figurinha> pacoteAberto; // lista para armazenar as figurinhas do pacote que foi aberto
+    public Figurinha[] todasAsFigurinhas; // array para armazenar todas as figurinhas disponíveis no jogo
+    public List<Figurinha> pacoteAberto; // lista para armazenar as figurinhas do pacote que foi aberto
 
     // A lista pra guardar as figurinhas agora
 
-    private List<Figurinha> albumDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas coladas no álbum do jogador
+    public List<Figurinha> albumDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas coladas no álbum do jogador
     public List<Figurinha> maoDoJogador = new List<Figurinha>(); // Lista para armazenar as figurinhas guardadas na mão do jogador
     void Start()
     {
